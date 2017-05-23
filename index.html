@@ -83,7 +83,7 @@
 						console.log(data)
 						var li = '';
 						data.stories.forEach(function(item){
-							li +=  ('<li><a href="detail.html?id='+item.id+'">'+'<img src='+item.images[0]+' alt=""/>'+item.title+'</a></li>')
+							li +=  ('<li><a href="./detail.html?id='+item.id+'">'+'<img src='+item.images[0]+' alt=""/>'+item.title+'</a></li>')
 						})
 						$('#app').append(li);
 						isCalling = false;
