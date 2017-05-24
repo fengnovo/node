@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, initial-scale=1, user-scalable=no">
+	<title>material</title>
+	<link type="text/css" rel="stylesheet" href="./libs/google.css" />
+	<link type="text/css" rel="stylesheet" href="./libs/materialize/css/materialize.css" media="screen,projection" />
+	<link type="text/css" rel="stylesheet" href="./index.css" />
+	<script src="./libs/jquery-2.1.1.min.js"></script>
+	<script src="./libs/materialize/js/materialize.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		<div id="comment">
+			<div class="navbar-fixed">
+				<nav class="light-blue">
+					<div class="nav-wrapper">
+						<ul class="left">
+							<li><a class="waves-effect waves-light" onclick="javascript:window.history.back();"><i class="material-icons">arrow_back</i></a></li>
+						</ul>
+						<a href="#!" class="left-align"><span id="commentLength">0</span>条短评论</a>
+						<ul class="right">
+							<li><a class="waves-effect waves-light"><i class="material-icons">border_color</i></a></li>
+						</ul>
+						
+					</div>
+				</nav>
+			</div>
+			<ul id="comment-content">
+
+			</ul>
+		</div>
+		
+	</div>
+	<script>
+		$(function(){
+			console.log(location.search.slice(4));
+			function changeTime(d) {
+				var date = new Date(d*1000);
+				function zeto(num) {
+					return num > 9 ? num : ('0'+num);
+				}
+				return zeto(date.getMonth()+1)+'-'+zeto(date.getDay())+' '+zeto(date.getHours())+':'+zeto(date.getMinutes())
+			}
+			$.ajax({
+				// url:'http://111.230.139.105/api/zhihu/story/'+location.search.slice(4)+'/short-comments',
+				url:'http://111.230.139.105/api/zhihu/story/'+location.search.slice(4),
+				success: function(data){
+					console.log(data);
+					var comments = data.comments;
+					
+					if(comments && comments.length>0){
+						$('#commentLength').text(comments.length);
+					}else{
+						$('#commentLength').text(0);
+					}
+					var _html = '';
+					var li = '';
+					comments.forEach(function (item) {
+						li+= '<li class="p-5 waves-effect">'
+							+'  <img src=' + item.avatar + ' alt="" />'
+							+'	<div class="m-l-7">'
+							+'		<span class="name">' + item.author + '</span>'
+							+'		<p class="m-r-1">' + item.content + '</p>'
+							+'		<span class="time">' + changeTime(item.time) + '</span>'
+							+'	</div>'
+							+'</li>';
+					});
+					// console.log(li);
+					$('#comment-content').html(li);
+				},
+				error: function(data){
+					console.log(data)
+				}
+			})
+		})
+	</script>
+</body>
+</html>

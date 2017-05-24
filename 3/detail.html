@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, initial-scale=1, user-scalable=no">
+	<title>material</title>
+	<link type="text/css" rel="stylesheet" href="./libs/google.css" />
+	<link type="text/css" rel="stylesheet" href="./libs/materialize/css/materialize.css" media="screen,projection" />
+	<link type="text/css" rel="stylesheet" href="./index.css" />
+	<script src="./libs/jquery-2.1.1.min.js"></script>
+	<script src="./libs/materialize/js/materialize.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		<div id="detail">
+			<div class="navbar-fixed">
+				<nav class="light-blue">
+					<div class="nav-wrapper">
+						<ul class="left">
+							<li><a class="waves-effect waves-light" onclick="back()"><i class="material-icons">arrow_back</i></a></li>
+						</ul>
+						<ul class="right">
+							<li><a class="waves-effect waves-light"><i class="material-icons" onclick="share()">share</i></a></li>
+							<li><a class="waves-effect waves-light"><i class="material-icons" onclick="star()">star</i></a></li>
+							<li><a class="waves-effect waves-light"><i class="material-icons" onclick="insert_comment()">insert_comment</i></a></li>
+							<li><a class="waves-effect waves-light"><i class="material-icons" onclick="thumb_up()">thumb_up</i></a></li>
+						</ul>
+						
+					</div>
+				</nav>
+			</div>
+			<div id="detail-content">
+
+			</div>
+		</div>
+		
+	</div>
+	<script>
+		function back(){
+			window.history.back();
+		}
+		function share(){
+			console.log('share');
+		}
+		function star(){
+			console.log('star');
+		}
+		function insert_comment(){
+			console.log('insert_comment');
+			window.location.href = './comment.html?id='+location.search.slice(4);
+		}
+		function thumb_up(){
+			console.log('thumb_up');
+		}
+		$(function(){
+			$.ajax({
+				url:'http://111.230.139.105/api/zhihu/news/'+location.search.slice(4),
+				success: function(data){
+					console.log(data);
+					if(data.css){
+						$('head').append('<link type="text/css" rel="stylesheet" href='+data.css+' />');
+					}
+					var _html = '';
+					if(data.image){
+						_html += '<div class="banner" style="background-image:url('+data.image+')">'
+								+'<span class="title">'+data.title+'</span>'
+								+'</div>';
+					}
+					_html += '<div>'+data.body+'</div>';
+					$('#detail-content').html(_html);
+					$('.img-place-holder').remove();
+				},
+				error: function(data){
+					console.log(data)
+				}
+			})
+		})
+	</script>
+</body>
+</html>
