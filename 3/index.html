@@ -8,6 +8,7 @@
 	<link type="text/css" rel="stylesheet" href="./libs/google.css" />
 	<link type="text/css" rel="stylesheet" href="./libs/materialize/css/materialize.css" media="screen,projection" />
 	<link type="text/css" rel="stylesheet" href="./index.css" />
+	<link type="text/css" rel="stylesheet" href="./loading.css" />
 	<script src="./libs/jquery-2.1.1.min.js"></script>
 	<script src="./libs/materialize/js/materialize.min.js"></script>
 </head>
@@ -20,8 +21,8 @@
 					<div class="nav-wrapper">
 						<a href="#!" class="left-align">首页</a>
 						<ul class="right">
-							<li><a href="#" class="waves-effect waves-light"><i class="material-icons">notifications</i></a></li>
-							<li><a href="#" class="waves-effect waves-light"><i class="material-icons">refresh</i></a></li>
+							<li><a href="#modal1" class="waves-effect waves-light"><i class="material-icons">notifications</i></a></li>
+							<li><a href="#" class="waves-effect waves-light"><i class="material-icons" onclick="refresh()">refresh</i></a></li>
 							<li><a class="dropdown-button waves-effect waves-light" href="#!" data-activates="dropdown1"><i class="material-icons">more_vert</i></a></li>
 						</ul>
 
@@ -29,38 +30,35 @@
 					</div>
 				</nav>
 			</div>
+			<div id="modal1" class="modal">
+				<div class="modal-content">
+				<h4>请登录</h4>
+				</div>
+				<div class="modal-footer">
+				<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">登录</a>
+				</div>
+			</div>
 			<ul id="dropdown1" class="dropdown-content z-depth-5">
 				<li><a href="#" style="color: #000">夜间模式</a></li>
-				<!--<li class="divider"></li>-->
 				<li><a href="#" style="color: #000">设置选项</a></li>
 			</ul>
 			<ul id="slide-out" class="side-nav">
-				<!--<li>
-					<div class="userView">
-						<div class="background">
-							<img src="http://materializecss.com/images/yuna.jpg">
-						</div>
-						<a href="#!user"><img class="circle" src="http://materializecss.com/images/yuna.jpg"></a>
-						<a href="#!name"><span class="white-text name">John Doe</span></a>
-						<a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
-					</div>
-				</li>-->
 				<li class="light-blue">
 					<a class="waves-effect waves-light">
-						<img class="circle" src="https://avatars3.githubusercontent.com/u/9670320">
+						<img class="circle slide-left" src="https://avatars3.githubusercontent.com/u/9670320">
 						<span class="color-white">fengnovo</span>
 					</a>
 				</li>
 				<li class="light-blue">
 					<a class="waves-effect waves-light i-b">
-						<span class="color-white"><i class="material-icons">star</i>我的收藏</span>
+						<span class="color-white"><i class="material-icons slide-left-icon">star</i>我的收藏</span>
 					</a>
 					<a class="waves-effect waves-light i-b">
-						<span class="color-white"><i class="material-icons">file_download</i>离线下载</span>
+						<span class="color-white"><i class="material-icons slide-left-icon">file_download</i>离线下载</span>
 					</a>
 				</li>
 				<li><a class="waves-effect">
-					<span class="color-blue"><i class="material-icons">home</i>首页</a></span>
+					<span class="color-blue"><i class="material-icons slide-left-icon slide-left-icon-home">home</i>首页</a></span>
 				</li>
 				<li><a class="waves-effect">日常心理学</a></li>
 				<li><a class="waves-effect">用户推荐日报</a></li>
@@ -75,37 +73,50 @@
 				<li><a class="waves-effect">动漫日报</a></li>
 				<li><a class="waves-effect">体育日报</a></li>
 			</ul>
-			<div class="slider">
-				<ul class="slides">
+			<div id="scrollArea">
+				<div class="slider">
+					<ul class="slides" id="banner">
+
+					</ul>
 					
-					<!--<li>
-						<img src="http://lorempixel.com/580/250/nature/2">
-						<div class="caption left-align">
-							<h5 class="light grey-text text-lighten-3 banner-text">深圳下暴雨，早上带伞了</h5>
+				</div>
+				<div id="container">
+					<ul id="list">
+						
+					</ul>
+					<div class="preloader-wrapper small active" id="loading">
+						<div class="spinner-layer spinner-green-only">
+						<div class="circle-clipper left">
+							<div class="circle"></div>
+						</div><div class="gap-patch">
+							<div class="circle"></div>
+						</div><div class="circle-clipper right">
+							<div class="circle"></div>
 						</div>
-					</li>
-					<li>
-						<img src="http://lorempixel.com/580/250/nature/3">
-						<div class="caption right-align">
-							<h5 class="light grey-text text-lighten-3 banner-text">吃早餐了吗？</h5>
 						</div>
-					</li>
-					<li>
-						<img src="http://lorempixel.com/580/250/nature/4">
-						<div class="caption center-align">
-							<h5 class="light grey-text text-lighten-3 banner-text">今天新闻是啥呢，会不会有好的项目呢</h5>
-						</div>
-					</li>-->
-				</ul>
+					</div>
+				</div>
 			</div>
-			<div id="container">
-				<ul id="list">
-					
-				</ul>
-			</div>
+
+			
 		</div>
 	</div>
 	<script>
+		function imgUrl(url) {
+			if(url.indexOf('zhimg.com')!=-1){
+				return 'http://111.230.139.105:9999'+url.slice(url.indexOf('zhimg.com')+9)
+			}else{
+				return url
+			}
+		}
+		function login(){
+
+		}
+		function refresh(){
+			window.location.reload();
+		}
+
+
 		$(function () {
 			var zhihuData = {};
 			if (sessionStorage.getItem('zhihu')) {
@@ -115,94 +126,59 @@
 			$(".button-collapse").sideNav();
 			
 			var date = 20170520, isCalling = false;
+
 			function s() {
-				$(window).unbind('scroll').bind('scroll', function () {
-					//下面这句主要是获取网页的总高度，主要是考虑兼容性所以把Ie支持的documentElement也写了，这个方法至少支持IE8  
-					var htmlHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
-					//clientHeight是网页在浏览器中的可视高度，  
-					var clientHeight = document.body.clientHeight || document.documentElement.clientHeight;
-					//scrollTop是浏览器滚动条的top位置，  
-					var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-					//通过判断滚动条的top位置与可视网页之和与整个网页的高度是否相等来决定是否加载内容； 
-					console.log(scrollTop,clientHeight,htmlHeight); 
-					// if (scrollTop + clientHeight == htmlHeight) {
-					if (scrollTop / htmlHeight > 0.6) {
-						// console.log('00');
-						if (!isCalling) {
+				// $('#app').height($(window).height());
+				var banner = document.getElementById('banner');    
+				/*高度*/    
+				var height = banner.offsetHeight;
+				//  console.log($(document).height());
+				$(document).unbind('scroll').on('scroll', function(){
+					var top = document.documentElement.scrollTop||document.body.scrollTop;
+					// console.log(top);
+					if(!isCalling){
+						console.log(top + 415);
+						console.log($('#container').height());
+						if((top + 390)> $('#container').height()){ 
+							$('#loading').show();
+							// console.log('0');
 							date -= 1;
+							// $('#loading').show();
 							callAjax();
 						}
-
-					}
-				})
+					}  
+				});
 			}
 
 			function callAjax() {
 				isCalling = true;
-				if (zhihuData[date]) {
-					var li = '';
-					zhihuData[date].forEach(function (item) {
-						// li += ('<li><a href="./detail.html?id=' + item.id + '">' + '<img src=' + item.images[0] + ' alt=""/>' + item.title + '</a></li>')
-						li+= '<li class="p-5 waves-effect c-radius z-depth-1">'
-								+'	<a href="./detail.html?id=' + item.id + '">'
-								+'		<p class="m-r-1">' + item.title + '</p>'
-								+'		<img src=' + item.images[0] + ' alt="">'
-								+'	</a>'
-								+'</li>';
-					})
-					$('#list').append(li);
-					isCalling = false;
-					s();
-					return
-				}
 				$.ajax({
 					url: 'http://111.230.139.105/api/zhihu/news/before/' + date,
 					success: function (data) {
-						console.log(data)
+						$('#loading').hide();
+						// console.log(data)
 						zhihuData[date] = data.stories;
 						sessionStorage.setItem('zhihu', JSON.stringify(zhihuData));
 						var li = '';
 						data.stories.forEach(function (item) {
 							// li += ('<li><a href="./detail.html?id=' + item.id + '">' + '<img src=' + item.images[0] + ' alt=""/>' + item.title + '</a></li>')
 							li+= '<li class="p-5 waves-effect c-radius z-depth-1">'
-								+'	<a href="./detail.html?id=' + item.id + '">'
+								+'	<a href="./detail.html?id=' + item.id + '" target=_blank>'
 								+'		<p class="m-r-1">' + item.title + '</p>'
-								+'		<img src=' + item.images[0] + ' alt="">'
+								+'		<img src=' + imgUrl(item.images[0]) + ' alt="">'
 								+'	</a>'
 								+'</li>';
 						})
 						$('#list').append(li);
-						// var options = [ {
-						// 	selector: '#list', 
-						// 	offset: 50, 
-						// 	callback: function(el) { 
-						// 		// Materialize.toast("This is our ScrollFire Demo!", 1500 ); 
-						// 	}
-						// }, {
-						// 	selector: '#list', 
-						// 	offset: 205, 
-						// 	callback: function(el) { 
-						// 		// Materialize.toast("Please continue scrolling!", 1500 ); 
-						// 	} 
-						// }, {
-						// 	selector: '#list', 
-						// 	offset: 400, 
-						// 	callback: function(el) { 
-						// 		Materialize.showStaggeredList($(el)); 
-						// 	} 
-						// }, {
-						// 	selector: '#list', 
-						// 	offset: 500, 
-						// 	callback: function(el) { 
-						// 		Materialize.fadeInImage($(el)); 
-						// 	} 
-						// }];
-						// Materialize.scrollFire(options);
-						isCalling = false;
 						s();
+						setTimeout(function(){
+							isCalling = false;
+						},300);
+						
 					},
 					error: function (data) {
-						console.log(data)
+						console.log(data);
+						$('#loading').hide();
 					}
 				})
 			}
@@ -216,7 +192,7 @@
 					var banners='',li = '';
 					data.top_stories.forEach(function (item) {
 						banners+= '<li><a href="./detail.html?id='+item.id+'">'
-							+'<img src=' + item.image + ' alt="" />'
+							+'<img src=' + imgUrl(item.image) + ' alt="" />'
 							+'<div class="caption center-align">'
 							+'<h5 class="light grey-text text-lighten-3 banner-text">' + item.title + '</h5>'
 							+'</div></a>'
@@ -228,15 +204,19 @@
 					});
 					data.stories.forEach(function (item) {
 						li+= '<li class="p-5 waves-effect c-radius z-depth-1">'
-							+'	<a href="./detail.html?id=' + item.id + '">'
+							+'	<a href="./detail.html?id=' + item.id + '" target=_blank>'
 							+'		<p class="m-r-1">' + item.title + '</p>'
-							+'		<img src=' + item.images[0] + ' alt="">'
+							+'		<img src=' + imgUrl(item.images[0]) + ' alt="">'
 							+'	</a>'
 							+'</li>';
 					});
 					$('#list').append(li);
-					isCalling = false;
 					s();
+
+					setTimeout(function(){
+						isCalling = false;
+					},300);
+					
 				},
 				error: function (data) {
 					console.log(data)

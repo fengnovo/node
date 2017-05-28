@@ -34,6 +34,13 @@
 		
 	</div>
 	<script>
+		function imgUrl(url) {
+			if(url.indexOf('zhimg.com')!=-1){
+				return 'http://111.230.139.105:9999'+url.slice(url.indexOf('zhimg.com')+9)
+			}else{
+				return url
+			}
+		}
 		$(function(){
 			console.log(location.search.slice(4));
 			function changeTime(d) {
@@ -44,31 +51,27 @@
 				return zeto(date.getMonth()+1)+'-'+zeto(date.getDay())+' '+zeto(date.getHours())+':'+zeto(date.getMinutes())
 			}
 			$.ajax({
-				// url:'http://111.230.139.105/api/zhihu/story/'+location.search.slice(4)+'/short-comments',
-				url:'http://111.230.139.105/api/zhihu/story/'+location.search.slice(4),
+				url:'http://111.230.139.105/api/zhihu/story/'+location.search.slice(4)+'/short-comments',
 				success: function(data){
-					console.log(data);
 					var comments = data.comments;
-					
 					if(comments && comments.length>0){
 						$('#commentLength').text(comments.length);
+						var li = '';
+						comments.forEach(function (item) {
+							li+= '<li class="p-5 waves-effect">'
+								+'  <img src=' + imgUrl(item.avatar) + ' alt="" />'
+								+'	<div class="m-l-7">'
+								+'		<span class="name">' + item.author + '</span>'
+								+'		<p class="m-r-1">' + item.content + '</p>'
+								+'		<span class="time">' + changeTime(item.time) + '</span>'
+								+'	</div>'
+								+'</li>';
+						});
+						// console.log(li);
+						$('#comment-content').html(li);
 					}else{
 						$('#commentLength').text(0);
 					}
-					var _html = '';
-					var li = '';
-					comments.forEach(function (item) {
-						li+= '<li class="p-5 waves-effect">'
-							+'  <img src=' + item.avatar + ' alt="" />'
-							+'	<div class="m-l-7">'
-							+'		<span class="name">' + item.author + '</span>'
-							+'		<p class="m-r-1">' + item.content + '</p>'
-							+'		<span class="time">' + changeTime(item.time) + '</span>'
-							+'	</div>'
-							+'</li>';
-					});
-					// console.log(li);
-					$('#comment-content').html(li);
 				},
 				error: function(data){
 					console.log(data)

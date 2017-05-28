@@ -36,6 +36,19 @@
 		
 	</div>
 	<script>
+		function imgUrl(url) {
+			if(url.indexOf('zhimg.com')!=-1){
+				// if(url.indexOf('https')!=-1){	//如果是https://
+				// 	return 'http://111.230.139.105:9999'+url.slice(url.indexOf('zhimg.com')+9)
+				// }else{							//如果是http://
+				// 	return 'http://111.230.139.105:9999'+url.slice(url.indexOf('zhimg.com')+9)
+				// }
+				return 'http://111.230.139.105:9999'+url.slice(url.indexOf('zhimg.com')+9)
+			}else{
+				return url
+			}
+			
+		}
 		function back(){
 			window.history.back();
 		}
@@ -62,12 +75,17 @@
 					}
 					var _html = '';
 					if(data.image){
-						_html += '<div class="banner" style="background-image:url('+data.image+')">'
+						_html += '<div class="banner" style="background-image:url('+imgUrl(data.image)+')">'
 								+'<span class="title">'+data.title+'</span>'
 								+'</div>';
 					}
 					_html += '<div>'+data.body+'</div>';
 					$('#detail-content').html(_html);
+					$('#detail-content img').map(function(i,item){
+						// console.log(item)
+						var x = imgUrl($(item).attr('src'));
+						$(item).attr('src',x);
+					});
 					$('.img-place-holder').remove();
 				},
 				error: function(data){

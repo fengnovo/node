@@ -19,11 +19,7 @@ html{
     height: 100%;
     position: absolute;
 }
-#app {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-}
+
 img {
     max-width: 100%;
 }
@@ -31,9 +27,57 @@ img {
 .title {
     text-align: center;
 }*/
+
+/*#app {
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+
+
+#scrollArea {
+    
+    overflow: auto;
+    height: 100%;
+}*/
+#app {
+    height: 100%;
+    background: rgb(240, 240, 240); 
+    -webkit-overflow-scrolling: touch;
+}
+#content {
+    /*height: calc(100% + 56px);*/
+    height: 100%;
+}
+#scrollArea {
+    background: rgb(240, 240, 240);
+    overflow: auto;
+    height: 100%;
+    text-align: center;
+}
+#container {
+    padding-bottom: 1.4rem;
+}
 #slide-out li img {
     width: 3rem;
 }
+
+.slide-left {
+    float: left;
+    margin-right: 1rem;
+    margin-top: 3px;
+}
+
+.slide-left-icon {
+    float: left;
+    margin-top: 11px;
+    margin-right: 2px;
+}
+
+.slide-left-icon-home{
+    margin-right: 1rem;
+}
+
 
 .color-white {
     color: #fff;
@@ -69,15 +113,16 @@ img {
 }
 
 .banner-text {
+    text-align: left;
     font-size: 1.4rem;
-    margin: 8rem 0 0 0;
+    margin: 8rem 0 0 1rem;
 }
 
-#content {
-    height: 100%;
-    width: 100%;
-    background: rgb(240, 240, 240);
+.grey-text.text-lighten-3 {
+    color: #fff !important;
 }
+
+
 
 #list {
     padding: .5rem;
@@ -135,9 +180,22 @@ img {
     padding: 10rem 1rem 0;
 }
 
+.slider .slides li .caption {
+    top: 11%;
+    left: 0; 
+    width: 100%;
+}
+.slider .slides li img {
+    background-position: center 39%;
+}
+
 #detail .title {
     font-size: 1.4rem;
     color: #fff;
+}
+
+#comment {
+    background: #fff;
 }
 
 #comment-content {
