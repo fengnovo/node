@@ -94,6 +94,10 @@ img {
     width: 200px;
 }
 
+#dropdown1 a {
+    color: #000
+}
+
 .slider  ul.indicators {
     z-index: 2;
     bottom: .1rem;
@@ -153,6 +157,7 @@ img {
 
 #list p{
     width: 72%;
+    text-align: left;
     padding: .5rem 0;
 }
 
